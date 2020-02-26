@@ -95,3 +95,4 @@ C:\Users\Lucas\source\repos\CursoOnline\test\CursoOnline.DominioTeste\obj\Debug\
 C:\Users\Lucas\source\repos\CursoOnline\test\CursoOnline.DominioTeste\bin\Debug\netcoreapp3.1\CursoOnline.Dominio.dll
 C:\Users\Lucas\source\repos\CursoOnline\test\CursoOnline.DominioTeste\bin\Debug\netcoreapp3.1\CursoOnline.Dominio.pdb
 C:\Users\Lucas\source\repos\CursoOnline\test\CursoOnline.DominioTeste\bin\Debug\netcoreapp3.1\ExpectedObjects.dll
+C:\Users\Lucas\source\repos\CursoOnline\test\CursoOnline.DominioTeste\bin\Debug\netcoreapp3.1\Bogus.dll

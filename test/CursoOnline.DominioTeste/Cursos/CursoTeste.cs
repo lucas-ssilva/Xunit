@@ -6,27 +6,52 @@ using CursoOnline.Dominio;
 using CursoOnline.Dominio.Enums;
 using ExpectedObjects;
 using CursoOnline.DominioTeste._Util;
+using Xunit.Abstractions;
+using CursoOnline.DominioTeste.Builders;
+using Bogus;
 
 namespace CursoOnline.DominioTeste.Cursos
 {
-    public class CursoTeste
+
+    public class CursoTeste : IDisposable
     {
+        private readonly ITestOutputHelper _output;
+        private string _nome;
+        private string _descricao;
+        private double _cargaHoraria;
+        private PublicoAlvo _publicoAlvo;
+        private double _valor;
+
+        public CursoTeste(ITestOutputHelper output )
+        {
+            var faker = new Faker();
+            _output = output;
+            _nome = faker.Random.Word();
+            _descricao = faker.Lorem.Paragraph();
+            _cargaHoraria = faker.Random.Double(1, 200);
+            _publicoAlvo = PublicoAlvo.Estudantes;
+            _valor = faker.Random.Double(1, 10000);
+        }
+
+        public void Dispose()
+        {
+
+        }
+
         [Fact]
         public void DeveCriarCurso()
         {
             var CursoEsperado = new
             {
-                nome = "Informatica basica",
-                cargaHoraria = (double)80,
-                PublicoAlvo = PublicoAlvo.Estudantes,
-                ValorDoCurso = (double)950.00
+                nome = _nome,
+                cargaHoraria = _cargaHoraria,
+                descricao = _descricao,
+                PublicoAlvo = _publicoAlvo,
+                ValorDoCurso = _valor
             };
 
-            //Ação
-            Curso curso = new Curso(CursoEsperado.nome, CursoEsperado.cargaHoraria, CursoEsperado.PublicoAlvo, CursoEsperado.ValorDoCurso);
+            Curso curso = new Curso(CursoEsperado.nome, CursoEsperado.descricao, CursoEsperado.cargaHoraria, CursoEsperado.PublicoAlvo, CursoEsperado.ValorDoCurso);
 
-            //Assert
-            //CursoEsperado.ToExpectedObject().ShouldMatch(curso);
             CursoEsperado.ToExpectedObject().Matches(curso);
         }
 
@@ -35,17 +60,8 @@ namespace CursoOnline.DominioTeste.Cursos
         [InlineData(null)]
         public void CursoNaoDeveTerNomeInvalido(string NomeInvalido)
         {
-            var CursoEsperado = new
-            {
-                nome = "Informatica basica",
-                cargaHoraria = (double)80,
-                PublicoAlvo = PublicoAlvo.Estudantes,
-                ValorDoCurso = (double)950.00
-            };
 
-            Assert.Throws<ArgumentException>(() => new Curso(NomeInvalido,
-            CursoEsperado.cargaHoraria, CursoEsperado.PublicoAlvo,
-            CursoEsperado.ValorDoCurso)).ComMensagem("Nome não pode ser  nulo ou vazio.");
+            Assert.Throws<ArgumentException>(() => CursoBuilder.Novo().ComNome(NomeInvalido).Build()).ComMensagem("Nome não pode ser  nulo ou vazio.");
         }
 
         [Theory]
@@ -53,17 +69,8 @@ namespace CursoOnline.DominioTeste.Cursos
         [InlineData(-1000000)]
         public void CursoNãoPodeTerCargaHorariaMenorQue1(double CargaHorariaInvalida)
         {
-            var CursoEsperado = new
-            {
-                nome = "Informatica basica",
-                cargaHoraria = (double)80,
-                PublicoAlvo = PublicoAlvo.Estudantes,
-                ValorDoCurso = (double)950.00
-            };
 
-                 Assert.Throws<ArgumentException>(() => new Curso(CursoEsperado.nome,
-                 CargaHorariaInvalida, CursoEsperado.PublicoAlvo,
-                 CursoEsperado.ValorDoCurso)).ComMensagem("Carga Horaria deve ser maior que 1 hora.");
+                 Assert.Throws<ArgumentException>(() => CursoBuilder.Novo().ComCargaHoraria(CargaHorariaInvalida).Build()).ComMensagem("Carga Horaria deve ser maior que 1 hora.");
         }
 
         [Theory]
@@ -72,17 +79,7 @@ namespace CursoOnline.DominioTeste.Cursos
         [InlineData(200.5)]
         public void CursoNãoPodeTerCargaHorariaMaiorQue200(double CargaHorariaInvalida)
         {
-            var CursoEsperado = new
-            {
-                nome = "Informatica basica",
-                cargaHoraria = (double)80,
-                PublicoAlvo = PublicoAlvo.Estudantes,
-                ValorDoCurso = (double)950.00
-            };
-
-                 Assert.Throws<ArgumentException>(() => new Curso(CursoEsperado.nome,
-                 CargaHorariaInvalida, CursoEsperado.PublicoAlvo,
-                 CursoEsperado.ValorDoCurso)).ComMensagem("Carga horaria não pode passar 200 horas");
+                 Assert.Throws<ArgumentException>(() => CursoBuilder.Novo().ComCargaHoraria(CargaHorariaInvalida).Build()).ComMensagem("Carga horaria não pode passar 200 horas");
 
         }
 
@@ -92,18 +89,10 @@ namespace CursoOnline.DominioTeste.Cursos
         [InlineData(-10000)]
         public void ValorDoCursoDeveSerMaiorQueZero(double ValorInvalido)
         {
-            var CursoEsperado = new
-            {
-                nome = "Informatica basica",
-                cargaHoraria = (double)80,
-                PublicoAlvo = PublicoAlvo.Estudantes,
-                ValorDoCurso = (double)950.00
-            };
-
-            Assert.Throws<ArgumentException>(() => new Curso(CursoEsperado.nome,
-            CursoEsperado.cargaHoraria, CursoEsperado.PublicoAlvo,
-           ValorInvalido)).ComMensagem("Valor deve ser maior que zero");
+            Assert.Throws<ArgumentException>(() => CursoBuilder.Novo().ComValor(ValorInvalido).Build()).ComMensagem("Valor deve ser maior que zero");
         }
+
+
     }
 
 }

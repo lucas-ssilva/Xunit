@@ -8,13 +8,15 @@ namespace CursoOnline.Dominio
    public class Curso
     {
         public string Nome { get; set; }
+        public string Descricao { get; set; }
         public double CargaHoraria { get; set; }
         public PublicoAlvo PublicoAlvo { get; set; }
         public double ValorDoCurso { get; set; }
 
-        public Curso(string nome, double cargaHoraria, PublicoAlvo publicoAlvo, double valorDoCurso)
+        public Curso(string nome,string descricao, double cargaHoraria, PublicoAlvo publicoAlvo, double valorDoCurso)
         {
             Nome = nome;
+            Descricao = descricao;
             CargaHoraria = cargaHoraria;
             PublicoAlvo = publicoAlvo;
             ValorDoCurso = valorDoCurso;

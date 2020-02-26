@@ -94,6 +94,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Bogus": {
+              "target": "Package",
+              "version": "[29.0.1, )"
+            },
             "ExpectedObjects": {
               "target": "Package",
               "version": "[2.3.4, )"
