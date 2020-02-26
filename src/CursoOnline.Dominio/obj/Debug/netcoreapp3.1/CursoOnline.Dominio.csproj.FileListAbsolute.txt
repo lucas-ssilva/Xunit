@@ -1,0 +1,8 @@
+C:\Users\Lucas\source\repos\CursoOnline\src\CursoOnline.Dominio\bin\Debug\netcoreapp3.1\CursoOnline.Dominio.deps.json
+C:\Users\Lucas\source\repos\CursoOnline\src\CursoOnline.Dominio\bin\Debug\netcoreapp3.1\CursoOnline.Dominio.dll
+C:\Users\Lucas\source\repos\CursoOnline\src\CursoOnline.Dominio\bin\Debug\netcoreapp3.1\CursoOnline.Dominio.pdb
+C:\Users\Lucas\source\repos\CursoOnline\src\CursoOnline.Dominio\obj\Debug\netcoreapp3.1\CursoOnline.Dominio.csprojAssemblyReference.cache
+C:\Users\Lucas\source\repos\CursoOnline\src\CursoOnline.Dominio\obj\Debug\netcoreapp3.1\CursoOnline.Dominio.AssemblyInfoInputs.cache
+C:\Users\Lucas\source\repos\CursoOnline\src\CursoOnline.Dominio\obj\Debug\netcoreapp3.1\CursoOnline.Dominio.AssemblyInfo.cs
+C:\Users\Lucas\source\repos\CursoOnline\src\CursoOnline.Dominio\obj\Debug\netcoreapp3.1\CursoOnline.Dominio.dll
+C:\Users\Lucas\source\repos\CursoOnline\src\CursoOnline.Dominio\obj\Debug\netcoreapp3.1\CursoOnline.Dominio.pdb
