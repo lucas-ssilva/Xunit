@@ -28,7 +28,7 @@ namespace CursoOnline.DominioTeste.Cursos
             _output = output;
             _nome = faker.Random.Word();
             _descricao = faker.Lorem.Paragraph();
-            _cargaHoraria = faker.Random.Double(1, 200);
+            _cargaHoraria = faker.Random.Double(2, 200);
             _publicoAlvo = PublicoAlvo.Estudantes;
             _valor = faker.Random.Double(1, 10000);
         }

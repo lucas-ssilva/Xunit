@@ -5,30 +5,40 @@ using Xunit;
 using CursoOnline.Dominio;
 using Moq;
 using CursoOnline.Dominio.Enums;
+using Bogus;
 
 namespace CursoOnline.DominioTeste.Cursos
 {
     public class ArmazenadorDeCursoTest
+
     {
+        private CursoDto _cursoDto;
+        private ArmazenadorDeCurso _armazenadorDeCurso;
+        private Mock<ICursoRepositorio> _cursoRepositorioMock;
+        public ArmazenadorDeCursoTest()
+        {
+
+
+            var fake = new Faker();
+            _cursoDto = new CursoDto
+            {
+                Nome = fake.Random.Words(),
+                Descricao = fake.Lorem.Paragraph(),
+                CargaHoraria = fake.Random.Double(2,200),
+                PublicoAlvoId = 1,
+                ValorDoCurso = fake.Random.Double(10,10000)
+            };
+
+            _cursoRepositorioMock = new Mock<ICursoRepositorio>();
+            _armazenadorDeCurso = new ArmazenadorDeCurso(_cursoRepositorioMock.Object);
+        }
+
         [Fact]
         public void DeveAdicionarCurso()
         {
-            var cursoDto = new CursoDto
-            {
-                Nome = "Curso A",
-                Descricao = "Descrição",
-                CargaHoraria = 80,
-                PublicoAlvoId = 1,
-                ValorDoCurso = 950.0
-            };
+            _armazenadorDeCurso.Armazenar(_cursoDto);
 
-            var cursoRepositorioMock = new Mock<ICursoRepositorio>();
-
-            var armazenadorDeCurso = new ArmazenadorDeCurso(cursoRepositorioMock.Object);
-
-            armazenadorDeCurso.Armazenar(cursoDto);
-
-            cursoRepositorioMock.Verify(r => r.Adicionar(It.IsAny<Curso>()));
+            _cursoRepositorioMock.Verify(r => r.Adicionar(It.Is<Curso>(c => c.Nome == _cursoDto.Nome && c.Descricao == _cursoDto.Descricao)));
 
 
         }
@@ -60,7 +70,7 @@ namespace CursoOnline.DominioTeste.Cursos
     {
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public int CargaHoraria { get; set; }
+        public double CargaHoraria { get; set; }
         public int PublicoAlvoId { get; set; }
         public double ValorDoCurso { get; set; }
     }
