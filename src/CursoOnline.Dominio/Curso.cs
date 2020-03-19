@@ -37,6 +37,8 @@ namespace CursoOnline.Dominio
             {
                 throw new ArgumentException("Valor deve ser maior que zero");
             }
+
+            //if(publicoAlvo != PublicoAlvo.Empreendedores && )
         }
 
         
